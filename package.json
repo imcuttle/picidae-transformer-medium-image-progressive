@@ -13,7 +13,7 @@
   "author": "imcuttle",
   "license": "MIT",
   "dependencies": {
-    "medium-image-progressive": "^0.0.3",
-    "picidae-transformer-calc-image-size": "0.0.1"
+    "medium-image-progressive": "^0.0.4",
+    "picidae-transformer-calc-image-size": "^0.0.1"
   }
 }
