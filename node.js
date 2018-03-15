@@ -13,7 +13,10 @@ var sharpLoaderPath = require.resolve('./sharp-loader')
 
 var evalVal = require('./evalVal')
 
-exports.use = 'picidae-transformer-calc-image-size'
+exports.use = function (opt) {
+  var debug = 'debug' in opt ? opt.debug : 'true'
+  return 'picidae-transformer-calc-image-size?debug=' + debug.toString()
+}
 
 function isUrlString(url) {
   return u.parse(url).slashes || url.startsWith('//')
