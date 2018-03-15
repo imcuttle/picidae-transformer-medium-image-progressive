@@ -8,6 +8,7 @@ var visit = require('picidae/exports/unist-util-visit')
 var u = require('url')
 var fs = require('fs')
 var nps = require('path')
+var sizeOf = require('image-size')
 var sharpLoaderPath = require.resolve('./sharp-loader')
 
 var evalVal = require('./evalVal')
@@ -51,15 +52,21 @@ exports.rehypeTransformer = function rehypeTransformer(options) {
     visit(node, 'element', function (ele) {
       if (ele.tagName === 'img') {
         var properties = ele.properties
-        if (properties.src/* && properties['width'] && properties['height']*/) {
+        if (properties.src) {
           var old = properties.src
-          if (isUrlString(properties.src)) {
+          if (isUrlString(properties.src) && properties['width'] && properties['height']) {
             properties.src = progressImageUrlGetter(properties.src)
             properties['data-progressive-src'] = old
           }
           else if (options.enableLocalThumbnail && !properties.src.startsWith('/')) {
             var filepath = nps.resolve(dirname, properties.src)
             if (fs.existsSync(filepath) && fs.statSync(filepath).isFile()) {
+              if (!properties['width'] || !properties['height']) {
+                // var size = sizeOf(fs.readFileSync(filepath))
+                // properties['width'] = size.width
+                // properties['height'] = size.height
+                return
+              }
               arr.push({
                 PICIDAE_EVAL_CODE: true,
                 value: 'require(' + JSON.stringify('!!file-loader?name=' + options.thumbnailName + '!' + sharpLoaderPath + '?scale=.1!' + filepath) + ')'
