@@ -1,0 +1,19 @@
+{
+  "name": "picidae-transformer-medium-image-progressive",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "imcuttle",
+    "picidae-transformer-medium-image-progressive"
+  ],
+  "author": "imcuttle",
+  "license": "MIT",
+  "dependencies": {
+    "medium-image-progressive": "^0.0.3",
+    "picidae-transformer-calc-image-size": "0.0.1"
+  }
+}
