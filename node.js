@@ -58,8 +58,9 @@ exports.rehypeTransformer = function rehypeTransformer(options) {
         if (properties.src) {
           var old = properties.src
           if (isUrlString(properties.src) && properties['width'] && properties['height']) {
+            // properties['data-progressive-src'] =
+            properties['data-src'] = old
             properties.src = progressImageUrlGetter(properties.src)
-            properties['data-progressive-src'] = old
           }
           else if (options.enableLocalThumbnail && !properties.src.startsWith('/')) {
             var filepath = nps.resolve(dirname, properties.src)
