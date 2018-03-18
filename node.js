@@ -8,7 +8,6 @@ var visit = require('picidae/exports/unist-util-visit')
 var u = require('url')
 var fs = require('fs')
 var nps = require('path')
-var sizeOf = require('image-size')
 var sharpLoaderPath = require.resolve('./sharp-loader')
 
 var evalVal = require('./evalVal')
