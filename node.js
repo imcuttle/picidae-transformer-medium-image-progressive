@@ -64,6 +64,10 @@ exports.rehypeTransformer = function rehypeTransformer(options) {
           else if (options.enableLocalThumbnail && !properties.src.startsWith('/')) {
             var filepath = nps.resolve(dirname, properties.src)
             if (fs.existsSync(filepath) && fs.statSync(filepath).isFile()) {
+              var extname = nps.extname(filepath) || ''
+              if (!['.jpg', '.gif', '.png', '.jpeg'].includes(extname.toLowerCase())) {
+                return
+              }
               if (!properties['width'] || !properties['height']) {
                 // var size = sizeOf(fs.readFileSync(filepath))
                 // properties['width'] = size.width
